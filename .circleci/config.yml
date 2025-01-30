@@ -67,7 +67,7 @@ jobs:
     - run: mkdir -v -p release
     - run: fakeroot tar -czvf release/ms213x-status-${CIRCLE_TAG}.amd64.tar.gz -C build ms213x-status
     - run: cd release && sha256sum ms213x-status-*.tar.gz *deb > sha256sums.txt
-    - run: > 
+    - run: >
         ghr \
           -u "${CIRCLE_PROJECT_USERNAME}" \
           -r "${CIRCLE_PROJECT_REPONAME}" \
