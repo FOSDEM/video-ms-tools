@@ -65,8 +65,8 @@ jobs:
     - attach_workspace:
         at: .
     - run: mkdir -v -p release
-    - run: fakeroot tar -czvf release/ms213x-status-${CIRCLE_TAG}.amd64.tar.gz -C build ms213x-status
-    - run: cd release && sha256sum ms213x-status-*.tar.gz *deb > sha256sums.txt
+    - run: fakeroot tar -czvf release/ms213x-cli-${CIRCLE_TAG}.amd64.tar.gz -C build ms213x-cli
+    - run: cd release && sha256sum ms213x-cli-*.tar.gz *deb > sha256sums.txt
     - run: >
         ghr \
           -u "${CIRCLE_PROJECT_USERNAME}" \
