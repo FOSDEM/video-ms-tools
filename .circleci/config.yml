@@ -48,10 +48,10 @@ jobs:
     - run: mkdir -v -p release
     - run: >
         fpm -n ms213x-cli -s dir -t deb -a amd64 -v ${CIRCLE_TAG#v} -p release \
+           --d libhidapi-hidraw0 \
+           --d libhidapi-libusb0 \
            build/ms213x-cli=/usr/bin/ \
            README.md=/usr/share/doc/ms213x-cli/ \
-           --depend libhidapi-hidraw0 \
-           --depend libhidapi-libusb0
     - run: package_cloud push fosdem/video-team/debian/bookworm release/*deb
     - store_artifacts:
         path: release
