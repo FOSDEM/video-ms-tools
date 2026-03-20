@@ -6,7 +6,7 @@ executors:
     - image: cimg/go:1.23
   debian:
     docker:
-    - image: debian:bookworm
+    - image: debian:trixie
   ruby:
     docker:
     - image: cimg/ruby:3.4
@@ -23,7 +23,7 @@ jobs:
 
     # I have no idea why git fails locally otherwise, but...
     - run: git config --global --add safe.directory /tmp/_circleci_local_build_repo
-    - run: git clone https://github.com/FOSDEM/video-ms213x-status.git .
+    - run: git clone https://github.com/FOSDEM/video-ms-tools.git .
     - run: chown -R $(id -nu):$(id -ng) . # another fix for wrong permissions in local builds
 
     - run: mkdir build
@@ -41,7 +41,7 @@ jobs:
     executor: ruby
     steps:
     - run: gem install fpm
-    - run: git clone https://github.com/FOSDEM/video-ms213x-status.git .
+    - run: git clone https://github.com/FOSDEM/video-ms-tools.git .
     - attach_workspace:
         at: .
     - run: gem install package_cloud
