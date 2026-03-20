@@ -53,6 +53,7 @@ jobs:
            build/ms213x-cli=/usr/bin/ \
            README.md=/usr/share/doc/ms213x-cli/ \
     - run: package_cloud push fosdem/video-team/debian/bookworm release/*deb
+    - run: package_cloud push fosdem/video-team/debian/trixie release/*deb
     - store_artifacts:
         path: release
     - persist_to_workspace:
@@ -64,19 +65,6 @@ jobs:
     executor: github
     steps:
     - run: apk add fakeroot
-    - attach_workspace:
-        at: .
-    - run: mkdir -v -p release
-    - run: fakeroot tar -czvf release/ms213x-cli-${CIRCLE_TAG}.amd64.tar.gz -C build ms213x-cli
-    - run: cd release && sha256sum ms213x-cli-*.tar.gz *deb > sha256sums.txt
-    - run: >
-        ghr \
-          -u "${CIRCLE_PROJECT_USERNAME}" \
-          -r "${CIRCLE_PROJECT_REPONAME}" \
-          -c "${CIRCLE_SHA1}" \
-          -delete \
-          "${CIRCLE_TAG}" \
-          ./release/
 
 workflows:
   build:
